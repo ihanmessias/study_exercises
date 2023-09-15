@@ -5,11 +5,13 @@ inserir, apagar e listar valores da sua lista
 Não permita que o programa quebre com 
 erros de índices inexistentes na lista.
 """
-# ---- Import Libs ---- #
+
+# -->> Import Libs <<-- #
 import os
-# ---- Variaveis ---- #
+# -->> Variaveis <<-- #
 list_ = []  # <--- Lista de compras
-# ---- Função para limpar o terminal ---- #
+AUTO = 2
+# -->> Função para limpar o terminal <<-- #
 def clear_terminal():
     os.system('cls' if os.name != 'posix' else 'clear')
 # ---- Função para adicionar valor a lista ---- #
@@ -27,17 +29,18 @@ def view_list():
 def remove_list():
     clear_terminal()
     view_list()
-    remove = input('Escolha o índice para apagar: ')
+    remove = input("Escolha o índice para apagar: ")
     if remove.isdigit():
         for i, l in enumerate(list_):
             if i != int(remove):
                 continue
+            
             else:
                 list_.remove(list_[i])
                 clear_terminal()
     else:
         print('Índice invalido.')
-
+# -->> APP <<-- #
 clear_terminal()
 while True:
     if not list_:
