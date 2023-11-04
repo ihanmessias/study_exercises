@@ -28,6 +28,7 @@ list(Path.cwd().glob('*'))
 list(Path.cwd().glob('*.py'))
 list(Path.cwd().glob('*/*'))
 list(Path.cwd().glob('**/*'))
+list(Path.cwd().glob('**/.*')) # Pastas Ocultas
 list(Path.home().glob('**/.*'))
 for i in list(Path.home().glob('**/*')):
     if i.is_file():
