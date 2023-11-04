@@ -1,46 +1,18 @@
 from pathlib import Path
-import shutil
-import os
 
-### FILES:
-## COPY
-# CopyFile (Pode renomear o arquivo enquanto o move):
-pwd = Path(__file__).parent
-file_ = pwd / 'texto.txt'
-file_d = pwd / 'destino1' / 'texto2.txt'
-shutil.copyfile(file_, file_d)
-# Copy1 (Apenas move o arquivo):
-file_d = pwd / 'destino2'
-shutil.copy(file_, file_d)
-# Copy2 (Mantém os metadados originais):
-file_d = pwd / 'destino3'
-shutil.copy2(file_, file_d)
+# Lendo um arquivo usando pathlib
+caminho_arquivo_leitura = Path(__file__).parent / 'texto.txt'
+try:
+    with open(caminho_arquivo_leitura,"r", encoding='utf-8') as arquivo:
+        conteudo = arquivo.read()
+        print("Conteúdo do arquivo:")
+        print(conteudo)
+except FileNotFoundError:
+    print("O arquivo não foi encontrado.")
 
-## MOVE
-# Move file:
-file_ = pwd / 'texto_move.txt'
-file_d = pwd / 'destino1'
-shutil.move(file_, file_d)
-
-## DELETE
-# Delete file:
-file_ = pwd / 'texto_rm.txt'
-if file_.exists():
-    os.remove(file_)
-
-### FOLDERS:
-## CREATE
-pwd = Path(__file__).parent
-folder_ = pwd / 'destino4'
-folder_.mkdir(exist_ok=True)
-## CREATE2 
-folder_ = pwd / 'destino5' / 'destino5_01'
-folder_.mkdir(parents=True, exist_ok=True)
-## COPY FODLER
-shutil.copytree(pwd / 'destino5', pwd / 'destino1' / 'destino5')
-## DELETE FOLDERS VAZIAS
-folder_rm = pwd / 'destino5' / 'destino5_01'
-folder_rm.rmdir()
-## DELETE FOLDERS -RF
-folder_rm = pwd / 'destino1'
-shutil.rmtree(folder_rm)
+# Escrevendo em um arquivo usando pathlib
+caminho_arquivo_escrita = caminho_arquivo_leitura
+conteudo_novo_arquivo = "Conteúdo para escrever no novo arquivo."
+with caminho_arquivo_escrita.open("w") as arquivo:
+    arquivo.write(conteudo_novo_arquivo)
+    print("Conteúdo foi escrito no novo arquivo.")
